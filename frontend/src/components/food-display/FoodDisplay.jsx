@@ -12,7 +12,11 @@ export default function FoodDisplay({ category }) {
         <div className="food-display" id="food-display">
             <h2>Top dishes near you</h2>
             <div className="food-display-list">
-                {food_list.map((item, idx) => <FoodItem key={idx} {...item} />)}
+                {food_list.map((item, idx) => {
+                    if (category === 'All' || category === item.category) {
+                        return <FoodItem key={idx} {...item} />
+                    }
+                })}
             </div>
         </div>
     );
