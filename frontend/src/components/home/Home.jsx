@@ -5,6 +5,7 @@ import Header from './header/Header';
 import FoodDisplay from '../food-display/FoodDisplay';
 
 import './Home.css';
+import AppDownload from './app-download/AppDownload';
 
 export default function Home() {
     const [category, setCategory] = useState('All');
@@ -14,6 +15,7 @@ export default function Home() {
             <Header />
             <ExploreMenu category={category} setCategory={setCategory} />
             <FoodDisplay category={category} />
+            <AppDownload />
         </div>
     );
 }
