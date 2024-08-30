@@ -1,7 +1,11 @@
+import { useGetTotalCartAmount } from '../../hooks/cart-hooks/useGetTotalCartAmount';
 import CartTotal from '../cart/cart-total/CartTotal';
+
 import './PlaceOrder.css';
 
 export default function PlaceOrder() {
+    const getTotalCartAmount = useGetTotalCartAmount();
+
     return (
         <form className="place-order">
             <div className="place-order-left">
@@ -20,7 +24,7 @@ export default function PlaceOrder() {
                     <input type="text" placeholder="Postal code" />
                     <input type="text" placeholder="Country" />
                 </div>
-                <input type="text" placeholder="Phone number" />
+                <input type="text" placeholder="Phone number" className="last-input" />
             </div>
             <div className="place-order-right">
                 <CartTotal />

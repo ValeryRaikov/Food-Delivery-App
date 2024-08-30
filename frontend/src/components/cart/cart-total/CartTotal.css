@@ -5,6 +5,18 @@
     gap: 20px;
 }
 
+.cart-total-header {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.cart-total-header .info {
+    font-style: italic;
+    font-weight: 600;
+    color: #555;
+}
+
 .cart-total-details {
     display: flex;
     justify-content: space-between;
