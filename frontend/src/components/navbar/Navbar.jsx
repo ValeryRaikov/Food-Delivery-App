@@ -1,50 +1,73 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { useGetTotalCartAmount } from '../../hooks/cart-hooks/useGetTotalCartAmount';
 
 import { assets } from '../../assets/assets';
 import './Navbar.css';
 
 export default function Navbar({ setShowLogin }) {
     const [menu, setMenu] = useState('home');
+    const getTotalCartAmount = useGetTotalCartAmount();
+    const navigate = useNavigate();
+
+    const handleNavigation = (path, hash) => {
+        setMenu(path);
+        navigate(path);
+
+        if (hash) {
+            setTimeout(() => {
+                const element = document.getElementById(hash);
+
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 0);
+        }
+    };
 
     return (
         <div className="navbar">
-            <Link to='/'><img src={assets.logo} className="logo" /></Link>
+            <Link to='/'>
+                <img src={assets.logo} className="logo" />
+            </Link>
             <ul className="navbar-menu">
                 <Link 
                     to={'/'}
-                    onClick={() => setMenu('home')} 
+                    onClick={() => handleNavigation('/', null)} 
                     className={menu === 'home' ? 'active': ''}
                 >
                     home
                 </Link>
-                <a 
-                    href="#explore-menu" 
-                    onClick={() => setMenu('menu')} 
+                <Link 
+                    to={'/'}
+                    onClick={() => handleNavigation('/', 'explore-menu')} 
                     className={menu === 'menu' ? 'active': ''}
                 >
                     menu
-                </a>
-                <a 
-                    href="#app-download"
-                    onClick={() => setMenu('mobile app')} 
+                </Link>
+                <Link 
+                    to={'/'}
+                    onClick={() => handleNavigation('/', 'app-download')} 
                     className={menu === 'mobile app' ? 'active': ''}
                 >
                     mobile app
-                </a>
-                <a 
-                    href="#footer"
-                    onClick={() => setMenu('contact us')} 
+                </Link>
+                <Link 
+                    to={'/'}
+                    onClick={() => handleNavigation('/', 'footer')} 
                     className={menu === 'contact us' ? 'active': ''}
                 >
                     contact us
-                </a>
+                </Link>
             </ul>
             <div className="navbar-right">
                 <img src={assets.search_icon} />
                 <div className="navbar-search-icon">
-                    <Link to='/cart'><img src={assets.basket_icon} /></Link>
-                    <div className="dot"></div>
+                    <Link to='/cart'>
+                        <img src={assets.basket_icon} />
+                    </Link>
+                    <div className={getTotalCartAmount() === 0 ? '' : 'dot'}></div>
                 </div>
                 <button onClick={() => setShowLogin(true)}>Sign In</button>
             </div>

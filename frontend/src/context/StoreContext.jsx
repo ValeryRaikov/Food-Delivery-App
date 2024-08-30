@@ -7,10 +7,6 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = ({children}) => {
     const [cartItems, setCartItems] = useState({});
 
-    useEffect(() => {
-        console.log(cartItems);
-    }, [cartItems]);
-
     const contextValue = {
         food_list,
         cartItems,
