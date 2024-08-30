@@ -1,0 +1,14 @@
+.cart-items-item {
+    margin: 10px 0;
+}
+
+.cart-items-item img {
+    width: 50px;
+}
+
+.cart-items-item .cross {
+    cursor: pointer;
+    color: #ff0000;
+    font-size: 18px;
+    font-weight: 600;
+}
