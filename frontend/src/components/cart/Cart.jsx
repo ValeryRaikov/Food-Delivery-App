@@ -1,22 +1,14 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 
 import { StoreContext } from '../../context/StoreContext';
-import { useGetTotalCartAmount } from '../../hooks/cart-hooks/useGetTotalCartAmount';
 
 import CartItem from './cart-item/CartItem';
+import CartTotal from './cart-total/CartTotal';
 
 import './Cart.css';
 
 export default function Cart() {
     const { cartItems, food_list } = useContext(StoreContext);
-    const getTotalCartAmount = useGetTotalCartAmount();
-    const [deliveryFee, setDeliveryFee] = useState(0);
-
-    useEffect(() => {
-        getTotalCartAmount() < 50
-            ? setDeliveryFee(5)
-            : setDeliveryFee(0)
-    }, [getTotalCartAmount]);
 
     return (
         <div className="cart">
@@ -38,26 +30,7 @@ export default function Cart() {
                 })}
             </div>
             <div className="cart-bottom">
-                <div className="cart-total">
-                    <h2>Cart Total</h2>
-                    <div>
-                        <div className="cart-total-details">
-                            <p>Subtotal</p>
-                            <p>${getTotalCartAmount().toFixed(2)}</p>
-                        </div>
-                        <hr />
-                        <div className="cart-total-details">
-                            <p>Delivery fee</p>
-                            <p>${deliveryFee.toFixed(2)}</p>
-                        </div>
-                        <hr />
-                        <div className="cart-total-details">
-                            <b>Total</b>
-                            <b>${(getTotalCartAmount() + deliveryFee).toFixed(2)}</b>
-                        </div>
-                    </div>
-                    <button>proceed to checkout</button>
-                </div>
+                <CartTotal />
                 <div className="cart-promocode">
                     <div>
                         <p>If you have a promocode, enter it here:</p>
