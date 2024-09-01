@@ -1,12 +1,19 @@
-import { useState } from 'react';
+import { useContext ,useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-import { useAddFood } from '../../hooks/useAddFood';
+import axios from 'axios';
 
-import { assets } from '../../assets/assets';
-import './AddProduct.css';
+import { AdminContext } from '../../context/AdminContext';
+import { useEditFood } from '../../hooks/useEditFood';
 
-export default function AddProduct() {
-    const addFood = useAddFood();
+import './EditProduct.css';
+
+export default function EditProduct() {
+    const { foodId } = useParams();
+    const { BASE_URL } = useContext(AdminContext);
+    const editFood = useEditFood();
+    const navigate = useNavigate();
     const [image, setImage] = useState(false);
     const [data, setData] = useState({
         name: '',
@@ -15,52 +22,62 @@ export default function AddProduct() {
         category: 'Salad',
     });
 
+    useEffect(() => {
+        (async () => {
+            const response = await axios.get(`${BASE_URL}/api/food/${foodId}`);
+
+            if (!response.data.success) {
+                toast.error(response.data.message);
+                return;
+            }
+
+            const { name, description, price, category, image } = response.data.data;
+            setData({ name, description, price, category });
+            setImage(image);
+        })();
+    }, [foodId, BASE_URL]);
+
     const onChangeHandler = (e) => {
         const fieldName = e.target.name;
         const value = e.target.value;
 
         setData(prevData => ({...prevData, [fieldName]: value}));
-    }
+    };
 
     const onSubmitHandler = async (e) => {
         e.preventDefault();
 
         const formData = new FormData();
 
+        formData.append('id', foodId);
         formData.append('name', data.name);
         formData.append('description', data.description);
         formData.append('price', Number(data.price));
         formData.append('category', data.category);
-        formData.append('image', image);
+        if (image) { 
+            formData.append('image', image);
+        }
 
-        addFood(formData);
-
-        setData({
-            name: '',
-            description: '',
-            price: '',
-            category: 'Salad',
-        });
-        setImage(false);
-    }
+        await editFood(formData, foodId);
+        navigate('/list');
+    };
 
     return (
-        <div className="add-product">
+        <div className="edit-product">
             <form onSubmit={onSubmitHandler} className="flex-col">
-                <div className="add-img-upload flex-col">
+                <div className="edit-img-upload flex-col">
                     <p>Upload Image</p>
                     <label htmlFor="image">
-                        <img src={image ? URL.createObjectURL(image) : assets.upload_area} />
+                        {image && <img src={`${BASE_URL}/uploads/${image}`} />}
                         <input 
                             onChange={(e) => setImage(e.target.files[0])} 
                             type="file" 
                             id="image" 
                             hidden 
-                            required 
                         />
                     </label>
                 </div>
-                <div className="add-product-name flex-col">
+                <div className="edit-product-name flex-col">
                     <p>Product name</p>
                     <input 
                         onChange={onChangeHandler} 
@@ -70,7 +87,7 @@ export default function AddProduct() {
                         placeholder="Type here..." 
                     />
                 </div>
-                <div className="add-product-description flex-col">
+                <div className="edit-product-description flex-col">
                     <p>Product description</p>
                     <textarea 
                         onChange={onChangeHandler} 
@@ -82,8 +99,8 @@ export default function AddProduct() {
                     >
                     </textarea>
                 </div>
-                <div className="add-category-price">
-                    <div className="add-category flex-col">
+                <div className="edit-category-price">
+                    <div className="edit-category flex-col">
                         <p>Product category</p>
                         <select 
                             onChange={onChangeHandler} 
@@ -100,7 +117,7 @@ export default function AddProduct() {
                             <option value="Noodles">Noodles</option>
                         </select>
                     </div>
-                    <div className="add-price flex-col">
+                    <div className="edit-price flex-col">
                         <p>Product price</p>
                         <input 
                             onChange={onChangeHandler} 
@@ -111,7 +128,7 @@ export default function AddProduct() {
                         />
                     </div>
                 </div>
-                <button type="submit" className="add-btn">Add</button>
+                <button type="submit" className="edit-btn">Update</button>
             </form>
         </div>
     );
