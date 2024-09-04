@@ -1,4 +1,4 @@
-import { useGetTotalCartAmount } from '../../hooks/cart-hooks/useGetTotalCartAmount';
+import { useGetTotalCartAmount } from '../../hooks/useGetTotalCartAmount';
 import CartTotal from '../cart/cart-total/CartTotal';
 
 import './PlaceOrder.css';

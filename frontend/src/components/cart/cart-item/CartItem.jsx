@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
 import { StoreContext } from '../../../context/StoreContext';
-import { useRemoveFromCart } from '../../../hooks/cart-hooks/useRemoveFromCart';
+import { useRemoveFromCart } from '../../../hooks/useRemoveFromCart';
 
 import './CartItem.css';
 

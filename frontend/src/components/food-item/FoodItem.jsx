@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
 
 import { StoreContext } from '../../context/StoreContext';
-import { useAddToCart } from '../../hooks/cart-hooks/useAddToCart';
-import { useRemoveFromCart } from '../../hooks/cart-hooks/useRemoveFromCart';
+import { useAddToCart } from '../../hooks/useAddToCart';
+import { useRemoveFromCart } from '../../hooks/useRemoveFromCart';
 
 import { assets } from '../../assets/assets';
 import './FoodItem.css';

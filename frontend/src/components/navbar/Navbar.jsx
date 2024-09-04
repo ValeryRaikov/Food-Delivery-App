@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useGetTotalCartAmount } from '../../hooks/cart-hooks/useGetTotalCartAmount';
+import { useGetTotalCartAmount } from '../../hooks/useGetTotalCartAmount';
 
 import { assets } from '../../assets/assets';
 import './Navbar.css';
