@@ -8,7 +8,7 @@ import CartTotal from './cart-total/CartTotal';
 import './Cart.css';
 
 export default function Cart() {
-    const { cartItems, food_list } = useContext(StoreContext);
+    const { BASE_URL, cartItems, foodList } = useContext(StoreContext);
 
     return (
         <div className="cart">
@@ -23,7 +23,7 @@ export default function Cart() {
                 </div>
                 <br />
                 <hr />
-                {food_list.map((item, idx) => {
+                {foodList.map((item, idx) => {
                     if (cartItems[item._id] > 0) {
                         return <CartItem key={idx} {...item} />;
                     }

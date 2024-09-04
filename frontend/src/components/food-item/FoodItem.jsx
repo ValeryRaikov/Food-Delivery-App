@@ -14,14 +14,14 @@ export default function FoodItem({
     description,
     image,
 }) {
-    const { cartItems } = useContext(StoreContext);
+    const { BASE_URL, cartItems } = useContext(StoreContext);
     const addToCart = useAddToCart();
     const removeFromCart = useRemoveFromCart();
 
     return (
         <div className="food-item">
             <div className="food-item-img-container">
-                <img src={image} className="food-item-img" />
+                <img src={`${BASE_URL}/images/${image}`} className="food-item-img" />
                 {!cartItems[_id]
                     ? <img 
                         onClick={() => addToCart(_id)} 

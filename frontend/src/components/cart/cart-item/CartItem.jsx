@@ -11,13 +11,13 @@ export default function CartItem({
     price,
     image,
 }) {
-    const { cartItems } = useContext(StoreContext);
+    const { BASE_URL, cartItems } = useContext(StoreContext);
     const removeFromCart = useRemoveFromCart();
 
     return (
         <div>
             <div className="cart-items-title cart-items-item">
-                <img src={image} />  
+                <img src={`${BASE_URL}/images/${image}`} />  
                 <p>{name}</p>
                 <p>${price}</p>
                 <p>{cartItems[_id]}</p>
