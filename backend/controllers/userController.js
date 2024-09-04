@@ -3,7 +3,6 @@ import userModel from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import validator from "validator";
-import { response } from "express";
 
 // Create jwt token
 const createToken = (id) => {
@@ -93,14 +92,14 @@ const registerUser = async (req, res) => {
         const user = await newUser.save();
         const token = createToken(user._id);
 
-        response.json({
+        res.json({
             success: true,
             token,
         });
     } catch (error) {
         console.error(error);
         
-        response.json({
+        res.json({
             success: false,
             message: error.message,
         });
