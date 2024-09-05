@@ -8,19 +8,19 @@ const authMiddleware = async (req, res, next) => {
             success: false,
             message: 'Not authorized! Login again.',
         });
+    }
 
-        try {
-            const tokenDecode = jwt.verify(token, process.env.JWT_SECRET);
-            req.body.userId = tokenDecode.id;
+    try {
+        const tokenDecode = jwt.verify(token, process.env.JWT_SECRET);
+        req.body.userId = tokenDecode.id;
 
-            next();
-        } catch (error) {
-           console.error(error);
-           res.json({
+        next();
+    } catch (error) {
+       console.error(error);
+       res.json({
             success: false,
             message: 'Authentication failed!',
-           });
-        }
+       });
     }
 }
 
