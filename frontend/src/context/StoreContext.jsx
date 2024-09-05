@@ -15,17 +15,23 @@ const StoreContextProvider = ({ children }) => {
         setFoodList(response.data.data);
     }
 
+    const loadCartData = async (token) => {
+        const response = await axios.post(`${BASE_URL}/api/cart/get`, {}, { headers: { token } });
+        setCartItems(response.data.cartData);
+    }
+
     useEffect(() => {
         const loadData = async () => {
             await fetchFoodList();
 
             if (localStorage.getItem('token')) {
                 setToken(localStorage.getItem('token'));
+                await loadCartData(localStorage.getItem('token'));
             }
         }
 
         loadData();
-    }, [fetchFoodList]);
+    }, [fetchFoodList, loadCartData]);
 
     const contextValue = {
         BASE_URL,
