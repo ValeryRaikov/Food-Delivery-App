@@ -31,7 +31,7 @@ const StoreContextProvider = ({ children }) => {
         }
 
         loadData();
-    }, [fetchFoodList, loadCartData]);
+    }, []);
 
     const contextValue = {
         BASE_URL,

@@ -42,7 +42,7 @@ export default function CartTotal() {
                     <b>${(getTotalCartAmount() + deliveryFee).toFixed(2)}</b>
                 </div>
             </div>
-            <button onClick={() => navigate('/order')}>{
+            <button type="submit" onClick={() => navigate('/order')}>{
                 location.pathname === '/cart' 
                     ? 'Proceed to Checkout'
                     : 'Proceed to Payment'
