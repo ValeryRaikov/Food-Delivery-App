@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -20,11 +20,15 @@ export default function Verify() {
 
         if (!response.data.success) {
             toast.error(response.data.message);
-            navigate();
+            navigate('/');
         }
 
         navigate('/my-orders');
     }
+
+    useEffect(() => {
+        verifyPayment();
+    }, []);
 
     return (
         <div className="verify">
