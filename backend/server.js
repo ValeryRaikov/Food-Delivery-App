@@ -13,7 +13,7 @@ import 'dotenv/config.js';
 
 // App config
 const app = express();
-const port = 3030;
+const port = process.env.PORT || 3030;
 
 // Middleware
 app.use(express.json());
