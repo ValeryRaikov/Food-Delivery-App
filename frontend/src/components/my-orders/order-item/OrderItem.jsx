@@ -6,6 +6,7 @@ export default function OrderItem({
     items,
     amount,
     status,
+    fetchOrders,
 }) {
     return (
         <div className="order-item">
@@ -21,7 +22,7 @@ export default function OrderItem({
             <p>${amount}.00</p>
             <p>Items: {items.length}</p>
             <p><span>&#x25cf;</span> <b>{status}</b></p>
-            <button>Track Order</button>
+            <button onClick={fetchOrders}>Track Order</button>
         </div>
     );
 }

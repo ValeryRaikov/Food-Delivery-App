@@ -26,7 +26,7 @@ export default function MyOrders() {
         <div className="my-orders">
             <h2>My Orders</h2>
             <div className="container">
-                {data.map((order, idx) => <OrderItem key={idx} idx={idx} {...order} />)}
+                {data.map((order, idx) => <OrderItem key={idx} idx={idx} {...order} fetchOrders={fetchOrders} />)}
             </div>
         </div>
     );
