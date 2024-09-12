@@ -51,7 +51,7 @@ export default function FoodItem({
                     <img src={assets.rating_starts} />
                 </div>
                 <p className="food-item-description">{description}</p>
-                <p className="fodd-item-price">${price}</p>
+                <p className="food-item-price">${price}</p>
             </div>
         </div>
     );
