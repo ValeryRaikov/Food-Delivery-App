@@ -2,12 +2,13 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import axios from 'axios';
+
 import { StoreContext } from '../../context/StoreContext';
 import { useGetTotalCartAmount } from '../../hooks/useGetTotalCartAmount';
 import CartTotal from '../cart/cart-total/CartTotal';
 
 import './PlaceOrder.css';
-import axios from 'axios';
 
 export default function PlaceOrder() {
     const { BASE_URL, token, foodList, cartItems } = useContext(StoreContext);
