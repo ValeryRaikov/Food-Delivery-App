@@ -1,5 +1,7 @@
 import Stripe from "stripe";
 
+import 'dotenv/config';
+
 import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
 
@@ -49,7 +51,7 @@ const placeOrder = async (req, res) => {
             cancelUrl: `${frontendUrl}/verify?success=false&orderId=${newOrder._id}`,
         });
 
-        response.json({
+        res.json({
             success: true,
             sessionUrl: session.url,
         })

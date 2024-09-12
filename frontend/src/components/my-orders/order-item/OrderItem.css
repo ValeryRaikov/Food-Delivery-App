@@ -1,0 +1,44 @@
+.order-item {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 1fr 2fr 1fr;
+    align-items: center;
+    gap: 30px;
+    font-size: 14px;
+    padding: 10px 20px;
+    color: #454545;
+    border: 1px solid tomato;
+}
+
+.order-item img {
+    width: 50px;
+}
+
+.order-item p span {
+    color: tomato;
+}
+
+.order-item p b {
+    font-weight: 600;
+    color: #454545;
+}
+
+.order-item button {
+    border: none;
+    border-radius: 4px;
+    padding: 12px 0;
+    background-color: #ffe1e1;
+    cursor: pointer;
+    color: #454545;
+}
+
+@media screen and (max-width: 900px) {
+    .order-item {
+        grid-template-columns: 1fr 2fr 1fr;
+        row-gap: 5px;
+        font-size: 12px;
+    }
+
+    .order-item button {
+        font-size: 10px;
+    }
+}
