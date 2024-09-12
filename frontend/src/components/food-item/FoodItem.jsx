@@ -1,4 +1,5 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
+import { toast } from 'react-toastify';
 
 import { StoreContext } from '../../context/StoreContext';
 import { useAddToCart } from '../../hooks/useAddToCart';
@@ -14,7 +15,7 @@ export default function FoodItem({
     description,
     image,
 }) {
-    const { BASE_URL, cartItems } = useContext(StoreContext);
+    const { BASE_URL, cartItems, token } = useContext(StoreContext);
     const addToCart = useAddToCart();
     const removeFromCart = useRemoveFromCart();
 
@@ -24,7 +25,10 @@ export default function FoodItem({
                 <img src={`${BASE_URL}/images/${image}`} className="food-item-img" />
                 {!cartItems[_id]
                     ? <img 
-                        onClick={() => addToCart(_id)} 
+                        onClick={token
+                            ? () => addToCart(_id)
+                            : () => toast.error('Login to purchase food!')
+                        } 
                         src={assets.add_icon_white} 
                         className="add" 
                     />
